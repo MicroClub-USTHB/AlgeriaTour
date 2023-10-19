@@ -2,10 +2,10 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 
-import { connectDB, connectServer } from "./config";
-import notFoundMiddleware from "./middlewares/notFound";
-import errorHandlerMiddleware from "./middlewares/errorHandler";
-import placeRouter from "./routes/place";
+import { connectDB, connectServer } from "./config.js";
+import notFoundMiddleware from "./middlewares/notFound.js";
+import errorHandlerMiddleware from "./middlewares/errorHandler.js";
+import placeRouter from "./routes/place.js";
 
 // Server
 const app = express();
