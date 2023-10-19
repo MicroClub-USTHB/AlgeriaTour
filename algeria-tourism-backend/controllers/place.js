@@ -4,7 +4,7 @@
 - it is imported in the routes file
 */
 
-import Place from "../models/place";
+import Place from "../models/place.js";
 
 /************************** POST **********************************/
 async function createPlace(req, res) {

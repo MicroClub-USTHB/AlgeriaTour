@@ -5,7 +5,7 @@
 */
 
 import { Router } from "express";
-import placeController from "../controllers/place";
+import placeController from "../controllers/place.js";
 
 const placeRouter = Router();
 
