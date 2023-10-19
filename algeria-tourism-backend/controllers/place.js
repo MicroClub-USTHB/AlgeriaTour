@@ -16,20 +16,20 @@ async function createPlace(req, res) {
     });
   }
 
-  const region = await Place.create({
+  const place = await Place.create({
     name,
     description,
     map_link,
     type,
   });
 
-  if (!region) {
+  if (!place) {
     return res.status(401).json({
       message: "Error when creating place",
     });
   }
 
-  res.status(101).json(region);
+  res.status(101).json(place);
 }
 /************************** GET **********************************/
 async function getAllPlaces(req, res) {
@@ -42,7 +42,7 @@ async function getPlaceById(req, res) {
   const place = await Place.findById(req.params.id);
   if (!place) {
     return res.json({
-      message: "Place none existant",
+      message: "Place none existent",
       statusCode: 404,
     });
   }
