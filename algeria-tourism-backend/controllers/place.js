@@ -33,9 +33,8 @@ async function createPlace(req, res) {
 }
 /************************** GET **********************************/
 async function getAllPlaces(req, res) {
-  console.log("places");
   const places = await Place.find(req.query);
-  res.status(100).json(places);
+  res.json(places);
 }
 
 async function getPlaceById(req, res) {
@@ -43,15 +42,16 @@ async function getPlaceById(req, res) {
   if (!place) {
     return res.json({
       message: "Place none existent",
-      statusCode: 404,
     });
   }
+
+  res.json(place);
 }
 /************************** PATCH **********************************/
 async function updatePlace(req, res) {
   try {
     const placeID = req.params.id;
-    const { name, description, map_link, type  } = req.body;
+    const { name, description, map_link, type } = req.body;
 
     if (!name || !description || !map_link || !type) {
       return res.status(404).json({
