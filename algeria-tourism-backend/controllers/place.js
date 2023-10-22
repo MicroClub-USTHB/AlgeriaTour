@@ -49,12 +49,40 @@ async function getPlaceById(req, res) {
 }
 /************************** PATCH **********************************/
 async function updatePlace(req, res) {
-  res.json({ route: "update place" });
+  try {
+    const placeID = req.params.id;
+    const { newname, newdescription, newmap_link, newtype } = req.body;
+
+    if (!newname || !newdescription || !newmap_link || !newtype) {
+      return res.status(404).json({
+        message: "Provide all values please!",
+      });
+    }
+
+    await Place.findByIdAndUpdate(placeID, {
+      newname,
+      newdescription,
+      newmap_link,
+      newtype,
+    });
+
+    res.json({ route: "update place" });
+  } catch (error) {
+    res.status(500).json({ error: "Error updating place" });
+  }
 }
 
 /************************** DELETE **********************************/
 async function deletePlace(req, res) {
-  res.json({ route: "delete place" });
+  try {
+    const placeID = req.params.id;
+
+    await Place.findByIdAndRemove(placeID);
+
+    res.json({ route: "delete place" });
+  } catch (error) {
+    res.status(500).json({ error: "Error deleting place" });
+  }
 }
 
 export default {
