@@ -51,19 +51,19 @@ async function getPlaceById(req, res) {
 async function updatePlace(req, res) {
   try {
     const placeID = req.params.id;
-    const { newname, newdescription, newmap_link, newtype } = req.body;
+    const { name, description, map_link, type  } = req.body;
 
-    if (!newname || !newdescription || !newmap_link || !newtype) {
+    if (!name || !description || !map_link || !type) {
       return res.status(404).json({
         message: "Provide all values please!",
       });
     }
 
     await Place.findByIdAndUpdate(placeID, {
-      newname,
-      newdescription,
-      newmap_link,
-      newtype,
+      name,
+      description,
+      map_link,
+      type,
     });
 
     res.json({ route: "update place" });
@@ -79,7 +79,7 @@ async function deletePlace(req, res) {
 
     await Place.findByIdAndRemove(placeID);
 
-    res.json({ route: "delete place" });
+    res.json({ route: "Place deleted" });
   } catch (error) {
     res.status(500).json({ error: "Error deleting place" });
   }
