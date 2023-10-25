@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose"
 
 const userSchema = mongoose.Schema(
 	{
@@ -9,9 +9,10 @@ const userSchema = mongoose.Schema(
 			type: String,
 			required: [true, "Email is required"],
 			unique: [true, "Email adress already taken"],
+			match : [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Email pattern is invalid"]
 		},
 		password: { type: String, required: [true, "Password is required"] },
-		profilepicture: {
+		profilePicture: {
 			type: String,
 			default:
 				"https://tacm.com/wp-content/uploads/2018/01/no-image-available.jpeg",
@@ -22,4 +23,4 @@ const userSchema = mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model("User", userSchema);
+export default mongoose.model("User", userSchema);
