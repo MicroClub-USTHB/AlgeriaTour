@@ -8,6 +8,7 @@ import errorHandlerMiddleware from "./middlewares/errorHandler.js";
 import placeRouter from "./routes/place.js";
 import regionRouter from "./routes/region.js";
 import userRouter from "./routes/user.js";
+import authRouter from "./routes/auth.js";
 
 // Server
 const app = express();
@@ -21,6 +22,7 @@ app.use(morgan("tiny")); // To log the incoming requests e.g. : GET /api/v1/plac
 app.use("/api/v1/place", placeRouter); // Place routes
 app.use("/api/v1/region", regionRouter); // Region routes
 app.use("/api/v1/user", userRouter); 
+app.use("/api/v1/auth", authRouter); 
 
 // Config
 app.use(notFoundMiddleware()); // For handling not found routes
