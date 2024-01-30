@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema(
         "https://tacm.com/wp-content/uploads/2018/01/no-image-available.jpeg",
     },
     password: { type: String, required: [true, "password is required"] },
+    role: { type: String,  default:"User" },
   },
   {
     timestamps: true,
