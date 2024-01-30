@@ -3,7 +3,9 @@ import User from "../models/user.js";
 
 export async function getAllUsers(req, res) {
   try{
-    const users = await User.find(req.query);
+    let users = await User.find(req.query);
+
+    users =  users.map((user) => user.password = undefined);
   return res.status(200).json(users);
   }catch(err){
     console.error(err);
@@ -19,7 +21,7 @@ export async function getUserById(req, res) {
             message: "user not found",
           });
         }
-      
+        user.password = undefined;
         return res.json(user);
       }catch(err){
         console.error(err);
@@ -37,7 +39,7 @@ export async function updateUser(req, res) {
   }
     const { lastName, firstName, email } = req.body;
 
-    if (!lastName || !firstName|| !email) {
+    if (!lastName && !firstName && !email) {
       return res.status(400).json({
         message: "you must provide any value",
       });
@@ -48,7 +50,7 @@ export async function updateUser(req, res) {
         firstName: firstName || user.firstName,
       email: email || user.email,
     });
-
+    updatedUser.password = undefined;
     return res.status(200).json({message: "user updated " ,data:updatedUser});
   } catch (error) {
     console.error(error)
